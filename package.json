@@ -1,0 +1,37 @@
+{
+  "name": "ada-cli",
+  "version": "1.0.0",
+  "description": "ada-cli — 终端命令行工具",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "ada": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "node --loader ts-node/esm src/index.ts",
+    "wallpaper": "node --loader ts-node/esm src/index.ts wallpaper",
+    "config": "node --loader ts-node/esm src/index.ts config --show",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "cli",
+    "wallpaper",
+    "pexels"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.18.0",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.3",
+    "dotenv": "^17.2.3",
+    "ora": "^9.4.0",
+    "wallpaper": "^7.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}
