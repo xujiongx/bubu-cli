@@ -1,14 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+import { PEXELS_API_KEY as BUILTIN_PEXELS_API_KEY } from './builtin-env.js';
 
-const CONFIG_DIR = path.join(os.homedir(), '.ada-cli');
+const CONFIG_DIR = path.join(os.homedir(), '.bubu-cli');
 const CONFIG_FILE = path.join(CONFIG_DIR, 'config.json');
 
 export const DEFAULT_WALLPAPER_DIR = path.join(
   os.homedir(),
   'Desktop',
-  'ada-wallpapers'
+  'bubu-wallpapers'
 );
 
 export interface Config {
@@ -37,4 +38,17 @@ export function setConfig(updates: Partial<Config>): void {
 
 export function getConfigPath(): string {
   return CONFIG_FILE;
+}
+
+export function getPexelsApiKey(): string {
+  return (
+    BUILTIN_PEXELS_API_KEY ||
+    process.env.PEXELS_API_KEY ||
+    getConfig().pexelsApiKey ||
+    ''
+  );
+}
+
+export function hasBuiltinPexelsApiKey(): boolean {
+  return Boolean(BUILTIN_PEXELS_API_KEY);
 }

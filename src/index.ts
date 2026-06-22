@@ -1,17 +1,14 @@
 #!/usr/bin/env node
 
-import { config as loadEnv } from 'dotenv';
 import { Command } from 'commander';
 import { configCommand } from './commands/config.js';
 import { wallpaperCommand } from './commands/wallpaper.js';
 
-loadEnv({ quiet: true });
-
 const program = new Command();
 
 program
-  .name('ada')
-  .description('ada-cli — 你的终端工具箱')
+  .name('bubu')
+  .description('bubu-cli — 随机下载并设置桌面壁纸')
   .version('1.0.0');
 
 program
@@ -25,7 +22,7 @@ program
 
 program
   .command('config')
-  .description('管理 ada-cli 配置')
+  .description('管理 bubu-cli 配置')
   .option('--pexels-key <key>', '设置 Pexels API Key')
   .option('--wallpaper-dir <dir>', '设置默认壁纸保存目录')
   .option('--show', '显示当前配置')

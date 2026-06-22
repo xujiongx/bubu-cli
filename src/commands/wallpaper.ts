@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
-import { getConfig, DEFAULT_WALLPAPER_DIR } from '../config.js';
+import { getConfig, DEFAULT_WALLPAPER_DIR, getPexelsApiKey } from '../config.js';
 import { setMacOSWallpaperAllSpaces } from '../utils/macos-wallpaper.js';
 
 interface PexelsPhoto {
@@ -89,17 +89,12 @@ export async function wallpaperCommand(options: {
   const { default: ora } = await import('ora');
 
   const config = getConfig();
-  const apiKey = process.env.PEXELS_API_KEY || config.pexelsApiKey;
+  const apiKey = getPexelsApiKey();
 
   if (!apiKey) {
     console.error(
       chalk.red('✗ 未找到 Pexels API Key。') +
-        '\n\n请通过以下任一方式配置：\n' +
-        chalk.yellow('  1. ada config --pexels-key <YOUR_API_KEY>') +
-        '\n' +
-        chalk.yellow('  2. export PEXELS_API_KEY=<YOUR_API_KEY>') +
-        '\n\n获取免费 API Key：' +
-        chalk.cyan('https://www.pexels.com/api/')
+        '\n\n请在项目根目录创建 .env 并配置 PEXELS_API_KEY，然后重新执行 npm run build'
     );
     process.exit(1);
   }

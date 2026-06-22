@@ -1,19 +1,28 @@
 {
-  "name": "ada-cli",
+  "name": "bubu-cli",
   "version": "1.0.0",
-  "description": "ada-cli — 终端命令行工具",
+  "description": "bubu-cli — 随机下载并设置桌面壁纸",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "ada": "dist/index.js"
+    "bubu": "dist/index.js"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "node --loader ts-node/esm src/index.ts",
-    "wallpaper": "node --loader ts-node/esm src/index.ts wallpaper",
-    "config": "node --loader ts-node/esm src/index.ts config --show",
-    "prepublishOnly": "npm run build"
+    "build": "node scripts/generate-builtin-env.mjs && tsc",
+    "dev": "node scripts/generate-builtin-env.mjs && node --loader ts-node/esm src/index.ts",
+    "wallpaper": "node scripts/generate-builtin-env.mjs && node --loader ts-node/esm src/index.ts wallpaper",
+    "config": "node scripts/generate-builtin-env.mjs && node --loader ts-node/esm src/index.ts config --show",
+    "prepublishOnly": "npm run build",
+    "login:npm": "npm login --registry=https://registry.npmjs.org/",
+    "publish:npm": "npm publish --registry=https://registry.npmjs.org/"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "keywords": [
     "cli",
     "wallpaper",
@@ -25,7 +34,6 @@
     "axios": "^1.18.0",
     "chalk": "^5.6.2",
     "commander": "^14.0.3",
-    "dotenv": "^17.2.3",
     "ora": "^9.4.0",
     "wallpaper": "^7.3.1"
   },

@@ -1,4 +1,4 @@
-import { getConfig, getConfigPath, setConfig, DEFAULT_WALLPAPER_DIR } from '../config.js';
+import { getConfig, getConfigPath, setConfig, DEFAULT_WALLPAPER_DIR, hasBuiltinPexelsApiKey } from '../config.js';
 
 export async function configCommand(options: {
   pexelsKey?: string;
@@ -23,15 +23,19 @@ export async function configCommand(options: {
     console.log(`  配置文件: ${getConfigPath()}`);
     console.log(
       `  Pexels API Key: ${
-        config.pexelsApiKey
-          ? chalk.green('已配置 (***' + config.pexelsApiKey.slice(-4) + ')')
-          : chalk.yellow('未配置')
+        hasBuiltinPexelsApiKey()
+          ? chalk.green('已内置（npm 包自带，无需配置）')
+          : config.pexelsApiKey
+            ? chalk.green('已配置 (***' + config.pexelsApiKey.slice(-4) + ')')
+            : chalk.yellow('未配置')
       }`
     );
     console.log(
       `  壁纸目录: ${config.wallpaperDir || chalk.gray(`默认 ${DEFAULT_WALLPAPER_DIR}`)}`
     );
     console.log('');
-    console.log(chalk.gray('提示: 也可通过环境变量 PEXELS_API_KEY 设置 API Key'));
+    if (!hasBuiltinPexelsApiKey()) {
+      console.log(chalk.gray('提示: 也可通过环境变量 PEXELS_API_KEY 设置 API Key'));
+    }
   }
 }
