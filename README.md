@@ -5,6 +5,7 @@
 ## 功能
 
 - 从 [Pexels](https://www.pexels.com/) 随机下载 4K 横屏桌面壁纸
+- 获取 [今日头条](https://www.toutiao.com/) 热门新闻热榜
 - 下载完成后**自动设置为桌面壁纸**（默认开启）
 - 支持 macOS、Linux (GNOME)、Windows
 - 支持自定义保存目录
@@ -52,6 +53,24 @@ bubu wallpaper -o ~/Desktop
 bubu wallpaper --no-set
 ```
 
+### 获取今日头条热榜
+
+```bash
+# 获取热门新闻并保存到 ~/Desktop/bubu-news/
+bubu news
+
+# 指定条数
+bubu news -n 10
+
+# 指定保存目录
+bubu news -o ~/Desktop/bubu-news
+
+# JSON 格式输出（含文件路径）
+bubu news --json
+```
+
+热榜数据会自动保存为 HTML 文件（含新闻配图），默认目录：`~/Desktop/bubu-news/`。
+
 默认保存目录为 `~/Desktop/bubu-wallpapers`，也可通过以下命令修改：
 
 ```bash
@@ -71,6 +90,7 @@ bubu config --show
 ```bash
 bubu --help
 bubu wallpaper --help
+bubu news --help
 bubu config --help
 ```
 
@@ -108,6 +128,7 @@ bubu-cli/
 │   ├── config.ts             # 配置读写
 │   └── commands/
 │       ├── wallpaper.ts      # 壁纸下载与设置
+│       ├── news.ts           # 今日头条热榜
 │       └── config.ts         # 配置管理
 ├── package.json
 └── tsconfig.json

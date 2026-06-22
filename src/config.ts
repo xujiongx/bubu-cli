@@ -12,6 +12,12 @@ export const DEFAULT_WALLPAPER_DIR = path.join(
   'bubu-wallpapers'
 );
 
+export const DEFAULT_NEWS_DIR = path.join(
+  os.homedir(),
+  'Desktop',
+  'bubu-news'
+);
+
 export interface Config {
   pexelsApiKey?: string;
   wallpaperDir?: string;
